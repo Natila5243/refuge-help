@@ -153,10 +153,10 @@
     list-style: none;
     
 
-    background: rgba(8, 8, 8, 0.5);
-    color: white;
-    padding: 30px;
-    font-size: 20px;
+  background: rgba(8, 8, 8, 0.5);
+  color: white;
+  padding: 30px;
+  font-size: 20px;
     backdrop-filter: blur(8px) saturate(180%);
     -webkit-backdrop-filter: blur(8px) saturate(180%);
     /* border-radius: 15px 15px 0 0; */
@@ -166,25 +166,115 @@
   #header li{
     background-color: white;
     color: black;
-    padding: 4px;
+    padding: 6px 8px;
     border-radius: 5px;
   }
+  /* avoid changing padding on hover to prevent layout jumps */
   #header li:hover{
-    padding: 8px;
     text-decoration: underline;
     color: rgb(182, 181, 181);
   }
+
+  /* Responsive header and language switcher */
+  @media (max-width: 768px){
+    #header ul{
+      gap: 18px;
+      padding: 18px;
+      font-size: 18px;
+      flex-wrap: wrap; /* allow items to wrap to multiple rows */
+    }
+    .language-switcher{
+      /* move the language select into flow so it doesn't overlap */
+      position: static;
+      margin: 10px auto 0 auto;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+    .language-switcher select{
+      font-size: 14px;
+      padding: 6px 8px;
+    }
+  }
+  @media (max-width: 480px){
+    /* On very small screens stack the header items for easier tapping */
+    #header ul{
+      gap: 8px;
+      padding: 10px;
+      font-size: 16px;
+      justify-content: center;
+      flex-direction: column; /* stack items vertically */
+      align-items: center;
+    }
+    #header li{
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 15px;
+      display: block;
+      width: 100%;
+      max-width: 280px; /* keep buttons a reasonable width */
+      text-align: center;
+      box-sizing: border-box;
+      margin: 4px 0;
+    }
+    /* Make language selector easy to tap and full width on tiny screens */
+    .language-switcher{
+      margin-top: 8px;
+      position: static;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .language-switcher select{
+      width: 90%;
+      max-width: 320px;
+      font-size: 16px;
+      padding: 8px 10px;
+    }
+  }
   #countrt-flages{
     display: flex;
+    flex-wrap: wrap; /* allow flags to wrap to new lines on small screens */
     gap: 10px;
     justify-content: center;
-  }
-  /* #countrt-flages img title{
-    background-color: black;
-    color: red;
-  } */
-  #countrt-flages img:hover{
+    align-items: center;
     padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  /* make flag images uniform size while preserving aspect ratio
+     We use fixed width/height boxes and object-fit: contain so different
+     aspect ratios look visually consistent. Media queries scale the box
+     down on smaller screens. */
+  #countrt-flages img{
+    width: 120px;
+    height: 80px;
+    object-fit: contain; /* preserves aspect ratio and centers the flag */
+    border-radius: 6px;
+    transition: transform 0.2s ease, padding 0.2s ease;
+    display: block;
+    background: rgba(255,255,255,0.02);
+  }
+  #countrt-flages img:hover{
+    transform: translateY(-4px) scale(1.03);
+    padding: 6px;
+  }
+
+  /* Responsive tweaks: scale the box sizes rather than relying on image proportions */
+  @media (max-width: 768px){
+    #countrt-flages img{
+      width: 90px;
+      height: 60px;
+    }
+  }
+  @media (max-width: 480px){
+    #countrt-flages{
+      gap: 8px;
+    }
+    #countrt-flages img{
+      width: 70px;
+      height: 50px;
+    }
   }
 </style>
 </head>
@@ -220,14 +310,14 @@
 </div>
 
 <div id="countrt-flages">
-      <img src="./eritrean falage.jpeg" alt="" width="100" height="80" title="Eritrea">
-      <img src="./DRC flage.webp" alt="" width="100" height="80" title="DRC">
-      <img src="./ethiopian falge.svg" alt="" width="100" height="80" title="Ethiopia">
-      <img src="./Flag_of_Rwanda.svg" alt="" width="120" height="80" title="Rwanda">
-      <img src="./sudan flage.jpeg" alt="" width="100" height="80" title="Sudan">
-      <img src="./south sudan flaghe.jpeg" alt="" width="100" height="80" title="South Sudan">
-      <img src="./somali flage.jpeg" alt="" width="100" height="80" title="Somali">
-      <img src="./Flag-Burundi.webp" alt="" width="100" height="80" title="Burundi">
+        <img src="./eritrean falage.jpeg" alt="Eritrea" title="Eritrea">
+        <img src="./DRC flage.webp" alt="DRC" title="DRC">
+        <img src="./ethiopian falge.svg" alt="Ethiopia" title="Ethiopia">
+        <img src="./Flag_of_Rwanda.svg" alt="Rwanda" title="Rwanda">
+        <img src="./sudan flage.jpeg" alt="Sudan" title="Sudan">
+        <img src="./south sudan flaghe.jpeg" alt="South Sudan" title="South Sudan">
+        <img src="./somali flage.jpeg" alt="Somali" title="Somali">
+        <img src="./Flag-Burundi.webp" alt="Burundi" title="Burundi">
     </div>
 
 <!-- Resource Categories -->
